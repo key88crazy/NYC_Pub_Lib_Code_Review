@@ -1,0 +1,52 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_form_alter().
+ */
+function exhibits_form_alter(&$form, FormStateInterface $form_state) {
+  if($form['#form_id']=='node_exhibits_form'){
+    $form['#validate'][] = 'exhibits_form_validate';		
+	}
+}
+
+
+function jbones_preprocess_page(&$variables) {
+  unset($variables['page']['content']['jbones_page_title']);
+}
+
+/**
+ * Form validation handler for exhibits content type().
+ *
+ */
+function exhibits_form_validate($form, FormStateInterface $form_state) {
+		$start_timestamp=$form_state->getValue('field_start_date')[0]['value']->getTimestamp();
+		$end_timestamp=$form_state->getValue('field_end_date')[0]['value']->getTimestamp();
+
+		if(date('w',$start_timestamp)==0 || date('w',$start_timestamp)==6){
+		  $form_state->setErrorByName('field_start_date','<h3>Start date must fall on a week day.</h3>');
+		}
+		if(date('w',$end_timestamp)==0 || date('w',$end_timestamp)==6){
+		  $form_state->setErrorByName('field_end_date','<h3>End date must fall on a week day.</h3>');
+		}
+}
+
+function exhibits_preprocess_node(&$variable) {
+  	if ($variable['node']->getType() === 'exhibits') {
+    	if($variable['elements']['field_start_date'][0]['#markup'] <= date('n/j/Y',strtotime('now'))){
+	   		$variable['field_start_date']='Now';
+   		} else {
+	   		$variable['field_start_date']=date('F j, Y',strtotime($variable['elements']['field_start_date'][0]['#markup']));
+   		}
+   		$variable['exhibit_title']=$variable['node']->getTitle();
+ 		  $variable['field_description'] = $variable['node']->get('field_description')->getValue()[0]['value'];
+ 		  $variable['exhibit_feature_image']=file_create_url($variable['node']->get('field_feature_image')->entity->uri->value);
+   		$variable['field_end_date']=date('F j, Y',strtotime($variable['elements']['field_end_date'][0]['#markup']));
+   		$variable['field_library_location']=$variable['elements']['field_location'][0]['#markup'];
+   		$variable['field_end_date']=date('F j, Y',strtotime($variable['elements']['field_end_date'][0]['#markup']));
+	}
+}

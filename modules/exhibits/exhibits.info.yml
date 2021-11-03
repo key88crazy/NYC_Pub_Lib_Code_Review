@@ -1,0 +1,4 @@
+name: Exhibits
+description: Custom Drupal 9 module by Jason Frumkin for code review
+type: module
+core_version_requirement: ^9.1

@@ -1,0 +1,19 @@
+uuid: cef9ea32-aca9-4e05-bf1a-29a67c65450b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.exhibits
+id: node.exhibits.field_description
+field_name: field_description
+entity_type: node
+bundle: exhibits
+label: Description
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

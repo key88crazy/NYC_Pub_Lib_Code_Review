@@ -1,0 +1,9 @@
+name: Jason Frumkin Bare Bones Template
+description: Code review skeleton theme for Drupal 9.
+type: theme
+core_version_requirement: ^8 || ^9
+base theme: false
+regions:
+  header: Header
+  content: Main content
+  footer: Footer

@@ -1,0 +1,77 @@
+uuid: 65c21d3c-6591-4163-b683-b23c89fd3239
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.exhibits.body
+    - field.field.node.exhibits.field_description
+    - field.field.node.exhibits.field_end_date
+    - field.field.node.exhibits.field_feature_image
+    - field.field.node.exhibits.field_location
+    - field.field.node.exhibits.field_start_date
+    - node.type.exhibits
+  module:
+    - datetime
+    - image
+    - options
+    - text
+    - user
+id: node.exhibits.default
+targetEntityType: node
+bundle: exhibits
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_description:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_end_date:
+    weight: 104
+    label: above
+    settings:
+      timezone_override: America/New_York
+      date_format: n/j/Y
+    third_party_settings: {  }
+    type: datetime_custom
+    region: content
+  field_feature_image:
+    weight: 106
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_location:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_start_date:
+    weight: 103
+    label: above
+    settings:
+      timezone_override: America/New_York
+      date_format: n/j/Y
+    third_party_settings: {  }
+    type: datetime_custom
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
